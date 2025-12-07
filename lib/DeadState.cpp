@@ -1,4 +1,4 @@
-#include "DeadState.hpp"
+#include "../include/DeadState.hpp"
 #include <memory>
 
 bool DeadState::estVivant() const {

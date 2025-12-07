@@ -1,5 +1,5 @@
-#include "Grid.hpp"
-#include "IRule.hpp"
+#include "../include/Grid.hpp"
+#include "../include/IRule.hpp"
 #include <stdexcept>
 #include <thread>
 
@@ -40,7 +40,7 @@ vector<Cell*> Grid::voisins(int x, int y) {
             if (dx == 0 && dy == 0) continue;
             int nx = x + dx;
             int ny = y + dy;
-            
+
             if (torique_) {
                 nx = (nx % lignes_ + lignes_) % lignes_;
                 ny = (ny % cols_ + cols_) % cols_;

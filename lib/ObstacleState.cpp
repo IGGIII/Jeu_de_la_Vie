@@ -1,4 +1,4 @@
-#include "ObstacleState.hpp"
+#include "../include/ObstacleState.hpp"
 #include <memory>
 
 bool ObstacleState::estVivant() const {

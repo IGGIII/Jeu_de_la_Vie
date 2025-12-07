@@ -1,16 +1,16 @@
-#include "Cell.hpp"
-#include "DeadState.hpp"
+#include "../include/Cell.hpp"
+#include "../include/DeadState.hpp"
 
 using namespace std;
 // Initialise une cellule morte à la position (0,0) par défaut.
 Cell::Cell() : pos_(), etat_(make_unique<DeadState>()) {}
 
-Cell::Cell(int x, int y, unique_ptr<CellState> etat) 
+Cell::Cell(int x, int y, unique_ptr<CellState> etat)
     : pos_(x, y), etat_(move(etat)) {
     if (!etat_) etat_ = make_unique<DeadState>();
 }
 //on clone l'état de l'autre cellule.
-Cell::Cell(const Cell& autre) 
+Cell::Cell(const Cell& autre)
     : pos_(autre.pos_), etat_(autre.etat_ ? autre.etat_->cloner() : make_unique<DeadState>()) {}
 
 Cell& Cell::operator=(const Cell& autre) {

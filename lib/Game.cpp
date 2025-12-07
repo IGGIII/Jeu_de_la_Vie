@@ -1,8 +1,7 @@
-#include "Game.hpp"
-#include "IRule.hpp"
-#include "AliveState.hpp"
-#include "DeadState.hpp"
-#include "ObstacleState.hpp"
+#include "../include/Game.hpp"
+#include "../include/IRule.hpp"
+#include "../include/AliveState.hpp"
+#include "../include/ObstacleState.hpp"
 #include <utility>
 #include <iostream>
 #include <string>
@@ -10,7 +9,7 @@
 using namespace std;
 //Constructeur : Prépare la grille et ouvre le fichier de log
 Game::Game(int l, int c, unique_ptr<IRule> r, bool torique)
-    : grid_(l, c, torique), regle_(move(r)), gen_(0) 
+    : grid_(l, c, torique), regle_(move(r)), gen_(0)
 {
     fichierLog_.open("simulation_log.txt");
     if (!fichierLog_) cerr << "Erreur log." << endl;
@@ -26,7 +25,7 @@ void Game::initGrille(const vector<pair<int, int>>& vivantes) {
     //Si on est au début, on met à jour le log immédiatement
     if (gen_ == 0 && fichierLog_) { fichierLog_.seekp(0); journaliser(); }
 }
-//Place les obstacles 
+//Place les obstacles
 void Game::initObstacles(const vector<pair<int, int>>& obstacles) {
     for (auto p : obstacles) {
         if (grid_.estDansGrille(p.first, p.second)) {
@@ -56,5 +55,5 @@ void Game::journaliser() {
         fichierLog_ << '\n';
     }
     fichierLog_ << "\n";
-    fichierLog_.flush(); 
+    fichierLog_.flush();
 }

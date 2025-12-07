@@ -3,18 +3,18 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <utility> 
+#include <utility>
 #include <random>
 #include <thread>
 #include <chrono>
-#include <limits> 
+#include <limits>
 
 //Model
-#include "Game.hpp"
-#include "ConwayRule.hpp"
+#include "../include/Game.hpp"
+#include "../include/ConwayRule.hpp"
 //View
-#include "SFMLView.hpp"
-#include "ConsoleView.hpp"
+#include "../include/SFMLView.hpp"
+#include "../include/ConsoleView.hpp"
 
 using namespace std;
 
@@ -59,10 +59,10 @@ InitData loadPatternFromFile(const string& filename, int offsetR, int offsetC) {
 //genere des coordonnees aleatoires selon une densite donnee
 vector<pair<int, int>> generateRandomCoordinates(int rows, int cols, double density) {
     vector<pair<int, int>> coords;
-    static random_device rd; 
-    static mt19937 gen(rd()); 
+    static random_device rd;
+    static mt19937 gen(rd());
     uniform_real_distribution<> dis(0.0, 1.0);
-    
+
     for (int r = 0; r < rows; ++r) {
         for (int c = 0; c < cols; ++c) {
             if (dis(gen) < density) {
@@ -76,15 +76,15 @@ vector<pair<int, int>> generateRandomCoordinates(int rows, int cols, double dens
 // Retourne des coordonnees pour des motifs predefinis
 vector<pair<int, int>> getPatternByName(const string& name, int offsetR, int offsetC) {
     vector<pair<int, int>> coords;
-    
+
     if (name == "glider")       coords = {{0,1}, {1,2}, {2,0}, {2,1}, {2,2}};
     else if (name == "blinker") coords = {{0,1}, {1,1}, {2,1}};
     else if (name == "toad")    coords = {{1,1}, {1,2}, {1,3}, {2,0}, {2,1}, {2,2}};
     else if (name == "beacon")  coords = {{0,0}, {0,1}, {1,0}, {1,1}, {2,2}, {2,3}, {3,2}, {3,3}};
-    
-    for(auto& p : coords) { 
-        p.first += offsetR; 
-        p.second += offsetC; 
+
+    for(auto& p : coords) {
+        p.first += offsetR;
+        p.second += offsetC;
     }
     return coords;
 }
@@ -99,12 +99,12 @@ int main() {
     cout << "  (C)onsole\n";
     cout << "  (G)raphique (SFML)\n";
     cout << "> ";
-    
+
     if (!(cin >> interfaceChoice)) {
         clearInput();
         interfaceChoice = 'c'; // Default to console on error
     }
-    
+
     bool useGui = (interfaceChoice == 'g' || interfaceChoice == 'G');
 
     //Dimensions adaptees a la vue choisie
@@ -136,7 +136,7 @@ int main() {
     cout << "  3. Motifs predefinis\n";
     cout << "  4. Vide\n";
     cout << "> ";
-    
+
     int patternChoice;
     //4 Initialisation du contenu
     if (!(cin >> patternChoice)) {
@@ -149,13 +149,13 @@ int main() {
         cout << "Nom du fichier : ";
         cin >> fname;
         startData = loadPatternFromFile(fname, offsetR, offsetC);
-    } 
+    }
     else if (patternChoice == 2) {
         double density;
         cout << "Densite (0.1 - 1.0) : ";
         if (!(cin >> density)) density = 0.2;
         startData.aliveCoords = generateRandomCoordinates(rows, cols, density);
-    } 
+    }
     else if (patternChoice == 3) {
         cout << "Quel motif ? (glider, blinker, toad, beacon) : ";
         string patName;

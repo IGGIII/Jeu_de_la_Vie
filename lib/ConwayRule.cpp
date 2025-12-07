@@ -1,16 +1,16 @@
-#include "ConwayRule.hpp"
-#include "AliveState.hpp"
-#include "DeadState.hpp"
-#include "ObstacleState.hpp"
+#include "../include/ConwayRule.hpp"
+#include "../include/AliveState.hpp"
+#include "../include/DeadState.hpp"
+#include "../include/ObstacleState.hpp"
 
 std::unique_ptr<CellState> ConwayRule::calculerEtat(const Cell& cell, const Grid& grid) const {
     // Si obstacle, reste obstacle
-    if (dynamic_cast<const ObstacleState*>(cell.getEtat())) 
+    if (dynamic_cast<const ObstacleState*>(cell.getEtat()))
         return std::make_unique<ObstacleState>();
 
     int vivants = 0;
     // Récupère les voisins autour de la cellule
-    auto voisins = grid.voisins(cell.getPos().x, cell.getPos().y); 
+    auto voisins = grid.voisins(cell.getPos().x, cell.getPos().y);
     // Compte combien de voisins sont vivants.
     for (auto v : voisins) {
         if (v->estVivant()) ++vivants;

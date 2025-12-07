@@ -1,8 +1,8 @@
-#include "SFMLView.hpp"
-#include "ConwayRule.hpp"
-#include "AliveState.hpp"
-#include "DeadState.hpp"
-#include "ObstacleState.hpp"
+#include "../include/SFMLView.hpp"
+#include "../include/ConwayRule.hpp"
+#include "../include/AliveState.hpp"
+#include "../include/DeadState.hpp"
+#include "../include/ObstacleState.hpp"
 #include <iostream>
 #include <sstream>
 #include <random>
